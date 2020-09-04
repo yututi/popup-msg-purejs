@@ -9,5 +9,5 @@
         var manager = getOrCreatePopupManager();
         manager.showMessage("some message.");
     });
-<script>
+</script>
 ```
