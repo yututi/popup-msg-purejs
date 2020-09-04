@@ -1,7 +1,7 @@
 # popup-msg-purejs
 
 
-## example
+## Example
 ```js
 document.addEventListener("DOMContentLoaded", () => {
     var manager = getOrCreatePopupManager();
