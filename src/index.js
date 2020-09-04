@@ -104,6 +104,14 @@ class PopupManager {
         popup.show();
         setTimeout(() => { popup.hide() }, localOptions.duration);
     }
+
+    /**
+     * 
+     * @param {Options} options 
+     */
+    updateOptions(options) {
+        this.globalOptions = Object.assign({}, this.globalOptions, options);
+    }
 }
 
 let isInitialized = false;
