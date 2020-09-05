@@ -6,7 +6,7 @@
 <script src="popup-msg.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        var manager = getOrCreatePopupManager();
+        var manager = PopupManager.init();
         manager.showMessage("some message.");
     });
 </script>
