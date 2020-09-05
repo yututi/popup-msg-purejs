@@ -108,7 +108,7 @@ export default class PopupManager {
      * 
      * @param {Options} options 
      */
-    updateOptions(options) {
+    updateOptions(options = {}) {
         this.globalOptions = Object.assign({}, this.globalOptions, options);
     }
 }
