@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = {
+const webpack = {
     entry: './src/index.js',
     output: {
         filename: 'popup-msg.js',
@@ -20,8 +20,8 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',   //loader名
-                    options: {                //Babelの設定
+                    loader: 'babel-loader',
+                    options: {
                         presets: ['@babel/preset-env']
                     }
                 }
@@ -29,4 +29,20 @@ module.exports = {
         ]
     },
     devtool: 'source-map'
+};
+
+module.exports = (env, argv) => {
+    if (argv.mode === "development") {
+        webpack.output = {
+            filename: 'popup-msg.js',
+            path: path.join(__dirname, 'example'),
+        }
+        webpack.devServer = {
+            // open: true,
+            // openPage: "index.html",
+            contentBase: path.join(__dirname, "example"),
+            watchContentBase: true,
+        }
+    }
+    return webpack;
 };

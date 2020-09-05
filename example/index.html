@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>popup</title>
+    <script src="popup-msg.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var manager = PopupManager.init();
+
+            document.getElementById("addMsgBtn").addEventListener("click", () => {
+                var select = document.getElementById("mode");
+                var mode = select.options[select.selectedIndex].value;
+                var duration = Number(document.getElementById("duration").value);
+                manager.showMessage(document.getElementById("text").value, {
+                    mode: mode,
+                    duration: duration * 1000
+                });
+            });
+        });
+    </script>
+    <style>
+        label {
+            display: inline-block;
+            width: 130px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="text">テキスト</label>
+        <input type="text" id="text" value="sample">
+    </div>
+    <div>
+        <label for="mode">モード</label>
+        <select id="mode">
+            <option value="primary">primary</option>
+            <option value="warn">warn</option>
+            <option value="error">error</option>
+        </select>
+    </div>
+    <div>
+        <label for="duration">表示時間(sec)</label>
+        <input type="number" id="duration" value="3">
+    </div>
+    <button id="addMsgBtn">ポップアップ表示</button>
+</body>
+
+</html>
