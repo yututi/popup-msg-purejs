@@ -24,30 +24,25 @@ class Popup {
          */
         this.removed = false;
 
-        var popupEl = createEl({
+        /**
+         * @type {HTMLElement} popup element.
+         */
+        this.el = createEl({
             classes: ["popup-wrapper"],
             children: [
                 createEl({
                     classes: ["popup", `popup--${options.mode}`],
                     children: [
                         createEl({ tag: "span", classes: ["popup__message"] }, el => el.textContent = message),
-                        createEl({ classes: ["popup__close"] })
+                        createEl({ classes: ["popup__close"] }, el => {
+                            el.addEventListener("click", () => {
+                                this.hide();
+                            });
+                        })
                     ]
                 })
             ]
         });
-
-        /**
-         * @type {HTMLElement} popup element.
-         */
-        this.el = popupEl;
-
-        var close = this.el.querySelector(".popup__close");
-        if (close) {
-            close.addEventListener("click", () => {
-                this.hide();
-            });
-        }
     }
 
     show() {
@@ -71,7 +66,28 @@ class Popup {
     }
 }
 
-export default class PopupManager {
+/**
+ * 
+ */
+class PopupManager {
+
+    /**
+     * 
+     * @param {Options} options 
+     */
+    static init(options) {
+        if (PopupManager.manager) {
+            options && PopupManager.manager.updateOptions(options);
+            return PopupManager.manager;
+        }
+        if(!document.body) throw new Error("Can not initialize before document load.")
+        var el = createEl({ classes: ["popup-container"] });
+        document.body.appendChild(el);
+
+        PopupManager.manager = new PopupManager(el, options);
+        return PopupManager.manager;
+    }
+
     /**
      * 
      * @param {Options} options 
@@ -112,3 +128,12 @@ export default class PopupManager {
         this.globalOptions = Object.assign({}, this.globalOptions, options);
     }
 }
+
+
+/**
+ * @type {PopupManager} シングルトンインスタンス
+ */
+PopupManager.manager = null;
+
+
+export default PopupManager;
