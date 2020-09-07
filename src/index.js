@@ -1,4 +1,4 @@
-import PopupManager from "./popup";
+import _PopupManager from "./popup";
 import "./popup.scss";
 import { createEl } from "./utils";
 
@@ -8,9 +8,9 @@ let manager = null;
 /**
  * 
  * @param {Options} options 
- * @return {PopupManager}
+ * @return {_PopupManager}
  */
-window.PopupManager = {
+export const PopupManager = {
     init: (options = {}) => {
         if (isInitialized) {
             options && manager.updateOptions(options);
@@ -20,7 +20,7 @@ window.PopupManager = {
         var el = createEl({ classes: ["popup-container"] });
         document.body.appendChild(el);
 
-        manager = new PopupManager(el, options);
+        manager = new _PopupManager(el, options);
         return manager;
     }
 }

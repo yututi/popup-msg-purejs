@@ -5,6 +5,7 @@ const webpack = {
     output: {
         filename: 'popup-msg.js',
         path: path.resolve(__dirname, 'dist'),
+        libraryTarget: "window"
     },
     module: {
         rules: [
@@ -33,10 +34,7 @@ const webpack = {
 
 module.exports = (env, argv) => {
     if (argv.mode === "development") {
-        webpack.output = {
-            filename: 'popup-msg.js',
-            path: path.join(__dirname, 'example'),
-        }
+        webpack.output.path = path.join(__dirname, 'example');
         webpack.devServer = {
             // open: true,
             // openPage: "index.html",
